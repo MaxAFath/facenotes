@@ -1,16 +1,30 @@
-const {Schema, model} = require('mongoose');
+const { Schema, model } = require('mongoose');
+const dateFormat = require('../utils/dateFormat');
 
 const ThoughtsSchema = new Schema({
-    title:{
+    thoughtText: {
         type: String,
         trim: true,
         required: 'Your thought is required'
     },
-    Thought:{
+    createdAt: {
+        type: Date,
+        default: Date.now,
+        get: createdAtVal => dateFormat(createdAtVal)
+    },
+    username: {
         type: String,
-        trim: true,
-        required: ""
+        required: true
+    },
+    reactions: {
+        type: Array
     }
-})
+},
+    {
+        toJSON: {
+            getters: true
+        }
+    }
+);
 
-module.exports = { Thoughts};
+module.exports = { Thoughts };
