@@ -27,7 +27,7 @@ const ReactionsSchema = new Schema({
         }
     });
 
-const ThoughtsSchema = new Schema({
+const ThoughtSchema = new Schema({
     thoughtText: {
         type: String,
         trim: true,
@@ -54,4 +54,10 @@ const ThoughtsSchema = new Schema({
     }
 );
 
-module.exports = { Thoughts };
+ReactionsSchema.virtual('replyCount').get(function(){
+    return this.replies.length;
+});
+
+const Reaction = model()
+
+module.exports = { Thought };

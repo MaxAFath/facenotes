@@ -1,23 +1,29 @@
-const {schema, model, Schema} = require('mongoose');
+const { Schema, model, Types, default: mongoose } = require('mongoose');
 
 const UserSchema = new Schema({
-    username:{
+    username: {
         type: String,
         trim: true,
-        unique:true,
+        unique: true,
         required: 'Your name is required'
     },
-    email:{
+    email: {
         type: String,
         required: 'email is required',
-        unique:true,
+        unique: true,
 
     },
-    thoughts:{
+    thoughts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Thought'
+    }],
+    friends: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }]
 
-    },
-    friends:{
-        //type:
-    }
+});
 
-})
+const User = model('User', UserSchema);
+
+model.exports = User;
