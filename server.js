@@ -1,5 +1,4 @@
-const express = require('rexpress');
-const db = require('./config/connection');
+const express = require('express');
 const mongoose = require('mongoose');
 
 const app = express();
@@ -16,6 +15,8 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb:/localhost:27018/facenotes'
 
 
 mongoose.set('debug', true);
+
+app.use(require('./routes'));
 
 
 app.listen(PORT, () => {
